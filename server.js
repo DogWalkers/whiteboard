@@ -92,7 +92,7 @@ var SampleApp = function() {
     /**
      *  Create the routing table entries + handlers for the application.
      */
-    self.createRoutes = function() {
+    /*self.createRoutes = function() {
         self.routes = { };
 
         self.routes['/asciimo'] = function(req, res) {
@@ -104,7 +104,7 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
-    };
+    };*/
 
 
     /**
@@ -112,13 +112,16 @@ var SampleApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
-        self.app = express.createServer();
+       // self.createRoutes();
+        self.app = express();
+        self.app.use(express.urlencoded());
+        self.app.use(express.logger('dev'));
 
         //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
+        self.app.get('/', function(req, res){
+            res.send("hello world!");
+
+        });
     };
 
 
