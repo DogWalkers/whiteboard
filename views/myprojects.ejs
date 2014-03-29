@@ -48,15 +48,19 @@
 							<br></br>
 							<span style="color: #AAAAB3">Created</span> <time class="timeago" datetime="<%=entry.dateCreated.toISOString()%>" style="color: #AAAAB3"></time>
 							<div class="row", style="float:right">
-								<div class="col-xs-6">
+								<div class="col-xs-4">
+									<a href="/viewproject/<%=entry.id%>">
+										<button type="button" class="btn btn-primary btn-sm" >More Info <span class = "glyphicon glyphicon-circle-arrow-right"></span> </button>
+									</a>
+								</div>
+
+								<div class="col-xs-4">
 									<a href="/editproject/<%=entry.id%>">
 										<button type="button" class="btn btn-warning btn-sm" >Edit <span class = "glyphicon glyphicon-pencil"></span> </button>
 									</a>
 								</div>
 
-								<div class="col-xs-6">
-
-
+								<div class="col-xs-4">
 										<button type="button" id="<%=entry.id%>" class="btn btn-danger btn-sm delete" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
 									</a>
 								</div>
