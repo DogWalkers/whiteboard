@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Profile</title>
-	<meta charset="utf-8">
+  <title>Profile</title>
+  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -22,25 +22,48 @@
 
 </head>
 <body>
-	<% include navbar %>
+  <% include navbar %>
   <div class = "container">
+  
+  <div class = "row">
+    <div class = "col-xs-4">
+      <h3><%= req.user.facebook.name%></h3> 
+      <p>
+        <b>Email: </b><%= req.user.facebook.email%> <br>
+        <b>Date Joined: </b><span class = "date-time"><%= req.user.timeCreated%></span>
+      </p>
+      <h5>Skills</h5>
+      <ul>
+      <% req.user.skills.forEach(function(skill){ %>
+          <li><%= skill %></li>
+      <%  });%>
+      </ul>
+    </div>
 
-  picture
+  </div>
+  
 
-  title
+  <!--title -->
 
-  projects created
+  <!--projects created -->
 
-  projects interested
+  <!--projects interested -->
 
-  skills
-
-
-
+  <!--skills -->
 
 
-	</div>
 
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/retina.js"></script>
+
+
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/retina.js"></script>
+  <script>
+  var date = new Date($(".date-time").html());
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  $(".date-time").html(day + "/" + month + "/" + year);
+  </script>
 </body>
