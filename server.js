@@ -132,9 +132,10 @@ var MainServer = function() {
         self.app.set('view engine', 'ejs');
         self.app.use(express.static(__dirname + '/public'));
 
-        require('./app/routes.js')(self.app, passport);
+        
         require('./config/passport')(passport);
         require('./config/database')(settings.connection_string);
+        require('./app/routes.js')(self.app, passport);
     };
 
 

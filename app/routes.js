@@ -19,9 +19,9 @@ module.exports = function(app, passport){
     }
   });
 
-  app.get('/listprojects', function(req, res){
+  app.get('/listprojects', isLoggedIn, function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
-      res.render('projectlist', {projects: projects});
+      res.render('projectlist', {projects: projects, req: req});
     });
   });
 
@@ -29,8 +29,8 @@ app.get('/logout', function(req, res){
   res.render('logout');
 });
 
-app.get('/profile', function(req, res){
-
+app.get('/profile', isLoggedIn, function(req, res){
+  res.render('profile', {req: req});
 });
 
 app.get('/viewproject/*', isLoggedIn, function(req, res){
@@ -42,16 +42,16 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
     });
   });
 
-app.get('/createproject', function(req,res){
+app.get('/createproject', isLoggedIn, function(req,res){
   res.render("createproject");
 });
 
-  app.post('/createproject', function(req, res){
-    
+  app.post('/createproject', isLoggedIn, function(req, res){
+   // res.render('/viewproject' + ....);
 
   });
 
-  app.post('/addskills', function(req, res){
+  app.post('/addskills', isLoggedIn, function(req, res){
     
     var skillsToAdd = [];
     skillsList.forEach(function(skill){
@@ -64,7 +64,7 @@ app.get('/createproject', function(req,res){
       if(err){
         console.log("poop");
       }else{
-        
+
         res.redirect('/listprojects');
       }
     });
@@ -72,7 +72,7 @@ app.get('/createproject', function(req,res){
 
   });
 
-  app.post('/extraaccountdetails', function(req, res){
+  app.post('/extraaccountdetails', isLoggedIn, function(req, res){
     
 
   });
@@ -100,7 +100,7 @@ app.get('/createproject', function(req,res){
 
 };
 
-    function isLoggedIn(req, res, next){
+var isLoggedIn = function(req, res, next){
       if(req.isAuthenticated()){
        // res.locals.user = req.user;
        // res.locals.userCount = userCount;

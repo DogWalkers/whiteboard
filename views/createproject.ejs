@@ -27,22 +27,30 @@
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">
         <div class="page-header"><h1>Post a New Project</h1></div>
-            <form action="/ask" method="post">
-                <div class="form-group category">
-                    <label>Choose Category</label>
-                    <select class="form-control" name="category">  
-                        <% cats.forEach(function(entry){ %>
-                        <option> <%= entry %> </option>
-                        <%  });%>
-                    </select>
-                </div>
-                <div class="form-group question" style="display: none">
-                    <label>Question</label>
-                    <input type="text" class="form-control" name="question" maxlength="120"></input>
+            <form action="/createproject" method="post">
+                <div class="form-group title">
+                    <label>Title of Project</label>
+                    <input type="text" class="form-control" name="title" id="title"></input>
                 </div>
                 <div class="form-group description" style="display: none">
-                    <label>Additional Details</label>
-                    <textarea rows="3" class="form-control" name="text" style="resize:vertical;min-height:2em" maxlength="400"></textarea>
+                    <label>Description of Project</label>
+                    <textarea rows="5" class="form-control" name="description" style="resize:vertical;min-height:2em"></textarea>
+                </div>
+                <div class="form-group positionName" style="display: none">
+                    <label>Name of Position</label>
+                    <input type="text" class="form-control" name="positionName"></input>
+                </div>
+                <div class="form-group numPositions" style="display: none">
+                    <label>Number of Positions</label>
+                    <input type="text" class="form-control" name="numPositions"></input>
+                </div>
+                <div class="form-group timeRequired" style="display: none">
+                    <label>Time Required for Position</label>
+                    <input type="text" class="form-control" name="timeRequired"></input>
+                </div>
+                <div class="form-group startDate" style="display: none">
+                    <label>Start Date</label>
+                    <input type="text" class="form-control" name="startDate"></input>
                 </div>
 
                 <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
@@ -55,15 +63,22 @@
 
 
 
+     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/retina.js"></script>
+
     <script>
         $(document).ready(function(){
-            $("select").prop("selectedIndex", -1);
-            $("select").change(function(){
-                $(".question").show("fast", function(){
-                    $(".description").show("fast", function(){
-                        $(".submit").show("fast");
+            $("#title").keyup(function(){
+                $(".description").show("fast", function(){
+                    $(".positionName").show("fast", function(){
+                        $(".numPositions").show("fast", function(){
+                           $(".timeRequired").show("fast", function(){
+                                $(".startDate").show("fast", function(){
+                                    $(".submit").show("fast");
+                                }); 
+                            }); 
+                        });
                     });
                 });
             }); 
