@@ -52,8 +52,9 @@ a<!DOCTYPE html>
 								</div>
 
 								<div class="col-xs-6">
-									<a href="/viewproject/<%=entry.id%>">
-										<button type="button" class="btn btn-danger btn-sm" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
+
+							
+										<button type="button" id="<%=entry.id%>" class="btn btn-danger btn-sm delete" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
 									</a>
 								</div>
 							</div>
@@ -69,6 +70,17 @@ a<!DOCTYPE html>
 	<script src="/js/jquery.timeago.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/retina.js"></script>
+	<script>
+									$('.delete').click(function(){
+										var bool = confirm("Are you sure you want to delete this project?");
+										if(bool)
+										{
+											
+											alert('/deleteproject/' +  $(this).attr('id'));
+											window.location = ('/deleteproject/' +  $(this).attr('id'));
+										}
+									});
+								</script>
 	<script>
 		$(document).ready(function() {
 			//$.timeago.settings.allowFuture = true;

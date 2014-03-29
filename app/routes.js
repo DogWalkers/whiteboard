@@ -73,6 +73,24 @@ app.get('/createproject', isLoggedIn, function(req,res){
   res.render("createproject", {req: req, skills: skillsList});
 });
 
+app.get('/deleteproject/*', isLoggedIn, function(req, res){
+  console.log("in method");
+   var id = req.url.split('/')[2];
+  Project.findById(id).remove(function(err, doc){
+    if(err)
+    {
+      
+      res.send("Could not be deleted");
+    }
+    else
+    {
+     
+      res.redirect('/myprojects');
+    }
+  });
+
+});
+
 app.post('/createproject', isLoggedIn, function(req, res){
    // res.render('/viewproject' + ....);
    console.log(req.body);
