@@ -1,4 +1,5 @@
 var User = require("../models/user");
+var Project = require("../models/project");
 
 module.exports = function(app, passport){
   var skillsList = ["css", "javascript"];
@@ -9,14 +10,17 @@ module.exports = function(app, passport){
 	});
 
   app.get('/loginsuccess', isLoggedIn, function(req,res){
-    console.log(skillsList);
-    res.render("firstuser", {skills: skillsList});
-
+    if (req.user.skills.length > 0) {
+      res.redirect('/listprojects');
+    } else {
+      console.log(skillsList);
+      res.render("firstuser", {skills: skillsList});
+    }
   });
 
   app.get('/listprojects', function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
-      res.render('/projectlist', {projects: projects});
+      res.render('projectlist', {projects: projects});
     });
   });
 
