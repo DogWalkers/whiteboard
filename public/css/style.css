@@ -1,6 +1,10 @@
+.grey
+{
+	color: #CCCCCE;
+}
 .green
 {
-	color: #308330;     /*#808093; */
+	color: #5CE62E;
 }
 body
 {
@@ -22,13 +26,9 @@ body
 
 .btn-sm
 {
-<<<<<<< HEAD
 	float: right;
 	vertical-align: center;
 	display: inline-block;
-}
-=======
-	padding-top: 70px;
 }
 
 .author
@@ -46,4 +46,8 @@ float: right;
 vertical-align: center;
 display: inline-block;
 }
->>>>>>> design changes
+
+.list
+{
+	padding-left: 20px;
+}

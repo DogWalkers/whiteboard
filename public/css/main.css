@@ -366,8 +366,8 @@ p.capitalize:first-letter {
 /* Footer Wrap */
 
 #f {
-	background-color: #1b1b1b;
-	padding-top: 40px;
+	background-color: #525256;
+	padding-top: 10px;
 	padding-bottom: 40px;
 }
 
@@ -375,8 +375,14 @@ p.capitalize:first-letter {
 	color: white;
 }
 
-#f h4 {
+#f ul {
 	color: white;
+}
+
+
+#f h2 {
+	color: white;
+	text-align: center;
 }
 
 /* Color Wraps */
@@ -635,7 +641,7 @@ p.capitalize:first-letter {
 
 #f ul li:before {
 	content: "\f099";
-	font-family: 'FontAwesome';
+	font-family: inherit;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: inherit;
