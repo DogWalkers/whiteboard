@@ -9,16 +9,16 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.png">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <link href="css/hover_pack.css" rel="stylesheet">
+    <link href="/css/hover_pack.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/colors/color-74c9be.css" rel="stylesheet">    
-    <link href="css/animations.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/colors/color-74c9be.css" rel="stylesheet">    
+    <link href="/css/animations.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
         label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
         .skillsPreferred {
@@ -34,43 +34,45 @@
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">
             <legend>Post a New Project</legend>
-            <form action="/createproject" method="post" id="myform">
-                <div class="form-group title">
+            <form action="/editproject" method="post" id="myform">
+                 <div class="form-group title">
                     <label>Title of Project</label>
-                    <input type="text" class="form-control required" name="title" id="title"></input>
+                    <input type="text" class="form-control required" name="title" id="title" value="<%=project.title%>"></input>
                 </div>
-                <div class="form-group description" style="display: none">
+                <div class="form-group description" style="">
                     <label>Description of Project</label>
-                    <textarea rows="5" class="form-control required" name="description" style="resize:vertical;min-height:2em"></textarea>
+                    <textarea rows="5" class="form-control required" name="description" value="" style="resize:vertical;min-height:2em"><%=project.description%></textarea>
                 </div>
-                <div class="form-group positionName" style="display: none">
+                <div class="form-group positionName" style="">
                     <label>Name of Position (ex. Web Developer)</label>
-                    <input type="text" class="form-control required" name="positionName"></input>
+                    <input type="text" class="form-control required" name="positionName" value="<%=project.positionName%>"></input>
                 </div>
-                <div class="form-group skillsPreferred" style="display: none">
+                <div class="form-group skillsPreferred" style="">
                     <label>Preferred Skills:</label>
                     <% skills.forEach(function(entry){ %>
                     <br>
-                    <input type="checkbox" name="<%=entry%>"><%=entry%>
+                    <input type="checkbox" name="<%=entry%>" <%if (project.preferredSkills.indexOf(entry) > -1){%> checked <% } %> > <%=entry%>
                     <% }); %>
                     
                 </div>
-                <div class="form-group numPositions" style="display: none">
+                <div class="form-group numPositions" style="">
                     <label>Number of Positions</label>
-                    <input type="text" class="form-control required" name="numPositions"></input>
+                    <input type="text" class="form-control required" name="numPositions" value="<%=project.numPositions%>"></input>
                 </div>
-                <div class="form-group timeRequired" style="display: none">
+                <div class="form-group timeRequired" style="">
                     <label>Time Required for Position (ex. 15 days)</label>
-                    <input type="text" class="form-control required" name="timeRequired"></input>
+                    <input type="text" class="form-control required" name="timeRequired" value="<%=project.timeRequired%>"></input>
                 </div>
-                <div class="form-group startDate required" style="display: none">
+                <div class="form-group startDate required" style="">
               </head>
               <body>
                 <label>Start Date</label>
-                <input type="text" id= "datepicker" class="form-control required" name="startDate"></input>
+                <input type="text" id= "datepicker" class="form-control required" name="startDate" value="<%=project.startDate%>"></input>
+                <input type="hidden" name= "projectid" value="<%=project._id%>"></input>
+                <in
             </div>
 
-            <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
+            <button type="submit" class="btn btn-warning btn-lg submit" style="">Submit</button>
         </form>
     </div>
 
@@ -79,7 +81,7 @@
 
 
 <script src="/js/jquery.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="/js/jquery.validate.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/retina.js"></script>
@@ -95,22 +97,6 @@
                 }
             }
         });
-
-        $("#title").keyup(function(){
-            $(".description").show("fast", function(){
-                $(".positionName").show("fast", function(){
-                    $(".skillsPreferred").show("fast", function(){
-                        $(".numPositions").show("fast", function(){
-                           $(".timeRequired").show("fast", function(){
-                            $(".startDate").show("fast", function(){
-                                $(".submit").show("fast");
-                            }); 
-                        }); 
-                       });
-                    });
-                });
-            });
-        }); 
 
     });
 

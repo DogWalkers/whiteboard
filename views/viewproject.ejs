@@ -38,7 +38,7 @@
 			-moz-column-count:3; 
 			column-count:3;">
 			<ul>
-				<%if (!project[0]) {%>
+				<%if (!project.preferredSkills[0]) {%>
 					<li> None </li>
 				<%}%>
 			<% project.preferredSkills.forEach(function(entry){ %>

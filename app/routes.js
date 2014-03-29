@@ -77,19 +77,22 @@ app.get('/deleteproject/*', isLoggedIn, function(req, res){
   console.log("in method");
    var id = req.url.split('/')[2];
   Project.findById(id).remove(function(err, doc){
-    if(err)
-    {
-      
+    if(err){
       res.send("Could not be deleted");
-    }
-    else
-    {
-     
+    }else{
       res.redirect('/myprojects');
     }
   });
-
 });
+
+app.get('/editproject/*', isLoggedIn, function(req, res){
+    var id = req.url.split('/')[2];
+    Project.findById(id, function(err, p){
+      if(err) return err;
+      console.log(p);
+      res.render('editproject', {project: p, req: req, skills: skillsList});
+    });
+  });
 
 app.post('/createproject', isLoggedIn, function(req, res){
    // res.render('/viewproject' + ....);
@@ -121,6 +124,45 @@ app.post('/createproject', isLoggedIn, function(req, res){
         res.redirect("/viewproject/" + newProject._id);
       }
    });
+});
+
+app.post('/editproject', isLoggedIn, function(req, res){
+   // res.render('/viewproject' + ....);
+   console.log(req.body);
+   var id = req.body.projectid;
+   console.log(id);
+   var title = req.body.title;
+   var description = req.body.description;
+   var positionName = req.body.positionName;
+   var numPositions = req.body.numPositions;
+   var timeRequired = req.body.timeRequired;
+   var startDate = req.body.startDate;
+   var creator = req.user;
+   var skillsToAdd = [];
+    skillsList.forEach(function(skill){
+      
+      if(req.body[skill]==="on"){
+        console.log(skill);
+        skillsToAdd.push(skill);
+      }
+    });
+
+    Project.findById(id).remove(function(err, doc){
+      if(err) res.send("error");
+         var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, preferredSkills: skillsToAdd});
+   newProject.save(function(err, newProject) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.redirect("/viewproject/" + newProject._id);
+      }
+   });
+
+
+    });
+
+
+
 });
 
   app.post('/addskills', isLoggedIn, function(req, res){

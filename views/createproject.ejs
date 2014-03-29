@@ -9,16 +9,16 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.png">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <link href="css/hover_pack.css" rel="stylesheet">
+    <link href="/css/hover_pack.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/colors/color-74c9be.css" rel="stylesheet">    
-    <link href="css/animations.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/colors/color-74c9be.css" rel="stylesheet">    
+    <link href="/css/animations.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
         label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
         .skillsPreferred {
@@ -35,6 +35,9 @@
         <div class="col-sm-8 col-sm-offset-2">
             <legend>Post a New Project</legend>
             <form action="/createproject" method="post" id="myform">
+
+
+
                 <div class="form-group title">
                     <label>Title of Project</label>
                     <input type="text" class="form-control required" name="title" id="title"></input>
@@ -69,6 +72,8 @@
                 <label>Start Date</label>
                 <input type="text" id= "datepicker" class="form-control required" name="startDate"></input>
             </div>
+
+
 
             <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
         </form>
@@ -111,6 +116,8 @@
                 });
             });
         }); 
+
+
 
     });
 
