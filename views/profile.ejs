@@ -3,73 +3,66 @@
 <head>
   <title>Profile</title>
   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="ico/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="ico/favicon.png">
 
-    <link href="css/hover_pack.css" rel="stylesheet">
+  <link href="css/hover_pack.css" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/colors/color-74c9be.css" rel="stylesheet">    
-    <link href="css/animations.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/colors/color-74c9be.css" rel="stylesheet">    
+  <link href="css/animations.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <body>
   <% include navbar %>
   <div class = "container">
-  
-  <div class = "row">
-    <div class = "col-xs-4">
-      <h3><%= user.facebook.name%></h3> 
-      <p>
+
+    <div class="panel panel-default col-md-8 col-md-offset-2">
+      <div class="panel-heading text-center"><h2><%= user.facebook.name%></h2></div>
+      <div class="panel-body">
+
+      <img src="http://graph.facebook.com/<%=user.facebook.id%>/picture?type=large" class=" text-center col-md-4">
+
+      <div class="col-md-4">
         <b>Email: </b><%= user.facebook.email%> <br>
         <b>Date Joined: </b><span class = "date-time"><%= user.timeCreated%></span>
-      </p>
+      
       <h5>Skills</h5>
       <ul>
-      <% user.skills.forEach(function(skill){ %>
-          <li><%= skill %></li>
-      <%  });%>
+        <% user.skills.forEach(function(skill){ %>
+        <li><%= skill %></li>
+        <%  });%>
       </ul>
       <h5>Projects</h5>
       <ul>
-      <% docs.forEach(function(project){ %>
-        <li><%= project.title %></li>
-      <%});%>
+        <% docs.forEach(function(project){ %>
+        <li><a href="/viewproject/<%=project._id%>"><%= project.title %></a></li>
+        <%});%>
       </ul>
+      </div>
+        
     </div>
-
   </div>
-  
-
-  <!--title -->
-
-  <!--projects created -->
-
-  <!--projects interested -->
-
-  <!--skills -->
+</div>
 
 
 
-
-
-  </div>
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/retina.js"></script>
-  <script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/retina.js"></script>
+<script>
   var date = new Date($(".date-time").html());
   var day = date.getDate();
   var month = date.getMonth()+1;
   var year = date.getFullYear();
   $(".date-time").html(day + "/" + month + "/" + year);
-  </script>
+</script>
 </body>
