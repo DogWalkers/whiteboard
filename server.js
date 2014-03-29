@@ -122,10 +122,10 @@ var MainServer = function() {
         self.app.use(express.logger('dev'));
         var MongoStore = require('connect-mongo')(express);
         self.app.use(express.cookieParser());
-       /* self.app.use(express.session({
+       self.app.use(express.session({
             store: new MongoStore({url: settings.connection_string}),
             secret: 'hackalothackalotIhackalot' 
-        }));*/ // session secret
+        }));
         self.app.use(passport.initialize());
         self.app.use(passport.session()); // persistent login sessions
         self.app.use(flash()); // use connect-flash for flash messages stored in session

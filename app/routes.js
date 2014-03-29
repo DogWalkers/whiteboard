@@ -3,8 +3,10 @@ module.exports = function(app, passport){
 		res.render("landingpage");
 	});
 
-  app.get('/loginsuccess', function(req,res){
-    res.render("firstuser.ejs");
+  app.get('/loginsuccess', isLoggedIn, function(req,res){
+    console.log("hey");
+    res.send("hey" + req.user.facebook.name);
+
   });
 
 
@@ -29,3 +31,12 @@ module.exports = function(app, passport){
 
 };
 
+    function isLoggedIn(req, res, next){
+      if(req.isAuthenticated()){
+       // res.locals.user = req.user;
+       // res.locals.userCount = userCount;
+        return next();
+      }
+      //console.log(req.user);
+      res.redirect('/');
+};
