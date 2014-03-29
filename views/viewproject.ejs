@@ -8,9 +8,7 @@
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="ico/favicon.png">
 
-	<title><%=project.title%></title>
-
-	<link href="/css/hover_pack.css" rel="stylesheet">
+	<title>View Project </title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.css" rel="stylesheet">
@@ -31,10 +29,17 @@
 			<div style="float:right;padding-right:50px"><span class="fa fa-eye" ></span> <%=project.numViews%></div>
 			<br><br>
 			<h4>Project Description</h4>
-			<p style="text-indent:20px"><%=project.description%></p>
-
-			<h4>Looking for:&nbsp;&nbsp; <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
+			<p style="text-indent:20px"><%=project.description%></p> 
+			<h4>Start Date:<br> <small><%=project.startDate%></small></h4> <br>
+			<h4>Looking for:&nbsp;&nbsp;<br> <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
+			<br>
 			<h4>Preferred Skills: </h4>
+			<ul>
+			<% project.preferredSkills.forEach(function(entry){ %>
+				<li><%=entry%></li>
+
+			<% }); %>
+			</ul>
 
 			<div class="text-center" style="padding-top:50px"><a href="mailto:<%=project.creator.facebook.email%>"><button type="button" class="btn btn-primary" >I'm Interested! </button></a></div>
 

@@ -55,10 +55,11 @@ app.get('/profile', isLoggedIn, function(req, res){
 
 app.get('/viewproject/*', isLoggedIn, function(req, res){
     var id = req.url.split('/')[2];
-    console.log(req.url);
-    console.log(id);
+
+
     Project.findByIdAndUpdate(id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
-      res.render('viewproject', {project: p, req:req});
+      console.log(p);
+      res.render('viewproject', {project: p, req: req});
     });
   });
 
@@ -86,6 +87,7 @@ app.post('/createproject', isLoggedIn, function(req, res){
     skillsList.forEach(function(skill){
       
       if(req.body[skill]==="on"){
+        console.log(skill);
         skillsToAdd.push(skill);
       }
     });
@@ -93,7 +95,7 @@ app.post('/createproject', isLoggedIn, function(req, res){
 
 
 
-   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, skillsPreferred: skillsToAdd});
+   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, preferredSkills: skillsToAdd});
    newProject.save(function(err, newProject) {
       if (err) {
         res.send(err);

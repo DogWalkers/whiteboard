@@ -13,6 +13,7 @@ var projectSchema = mongoose.Schema({
     timeRequired: {type: String},
 	creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     numViews: {type:Number, default: 0},
+    preferredSkills: [{type: String}]
     
 });
 
