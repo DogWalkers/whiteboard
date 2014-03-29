@@ -2,6 +2,10 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+//var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
+var settings = require('./config/settings');
 
 
 /**
@@ -116,12 +120,21 @@ var SampleApp = function() {
         self.app = express();
         self.app.use(express.urlencoded());
         self.app.use(express.logger('dev'));
+        //var MongoStore = require('connect-mongo')(express);
+        self.app.use(express.cookieParser());
+        //self.app.use(express.session({
+        //    store: new MongoStore({url: settings.connection_string}),
+        //    secret: 'ilovescotchscotchyscotchscotch' 
+        //})); // session secret
+        self.app.use(passport.initialize());
+        self.app.use(passport.session()); // persistent login sessions
+        self.app.use(flash()); // use connect-flash for flash messages stored in session
+        self.app.set('view engine', 'ejs');
+        self.app.use(express.static(__dirname + '/public'));
 
-        //  Add handlers for the app (from the routes).
-        self.app.get('/', function(req, res){
-            res.send("hello world!");
-
-        });
+        require('./app/routes.js')(self.app, passport);
+        //require('./config/passport')(passport);
+        //require('./config/database')(settings.connection_string);
     };
 
 
@@ -132,7 +145,7 @@ var SampleApp = function() {
         self.setupVariables();
         self.populateCache();
         self.setupTerminationHandlers();
-
+        settings.init();
         // Create the express server and routes.
         self.initializeServer();
     };
@@ -156,7 +169,7 @@ var SampleApp = function() {
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
-zapp.initialize();
-zapp.start();
+var server = new MainServer();
+server.initialize();
+server.start();
 
