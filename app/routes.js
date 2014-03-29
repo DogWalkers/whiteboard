@@ -10,9 +10,9 @@ module.exports = function(app, passport){
   });
 
   app.post('/submitproject', function(req, res){
-    Project newProject = req.sdf;
+    //Project newProject = req.sdf;
 
-    newProject.save();
+    //newProject.save();
 
   });
 
