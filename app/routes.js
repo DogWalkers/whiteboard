@@ -9,12 +9,43 @@ module.exports = function(app, passport){
 
   });
 
-  app.post('/submitproject', function(req, res){
-    Project newProject = req.sdf;
-
-    newProject.save();
+  app.get('/listprojects', function(req, res){
 
   });
+
+app.get('/logout', function(req, res){
+  res.render('/logout');
+
+
+});
+
+app.get('/viewproject/*', isLoggedIn, function(req, res){
+    var id = req.url.split('/')[2];
+    console.log(req.url);
+    console.log(id);
+    Project.findById(id).exec(function(err, p){
+      res.render('viewproject', {project: p});
+    });
+  });
+
+  app.post('/submitproject', function(req, res){
+    //Project newProject = req.sdf;
+
+    //newProject.save();
+
+  });
+
+  app.post('/addskills', function(req, res){
+
+
+  });
+
+  app.post('/extraaccountdetails', function(req, res){
+    
+
+  });
+
+
 
 // =====================================
   // FACEBOOK ROUTES =====================
