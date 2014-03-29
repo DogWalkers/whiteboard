@@ -1,11 +1,12 @@
+var User = require("../models/user");
+
 module.exports = function(app, passport){
 	app.get('/', function(req,res){
 		res.render("landingpage");
 	});
 
   app.get('/loginsuccess', isLoggedIn, function(req,res){
-    console.log("hey");
-    res.render("firstuser");
+    res.render("firstuser", {skills: User.schema.path('skills').enumValues});
 
   });
 
@@ -14,7 +15,7 @@ module.exports = function(app, passport){
   });
 
 app.get('/logout', function(req, res){
-  res.render('/logout');
+  res.render('logout');
 
 
 });
