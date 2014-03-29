@@ -21,7 +21,6 @@ module.exports = function(app, passport){
 
   app.get('/listprojects', isLoggedIn, function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
-      console.log(projects[2].creator._id);
       res.render('projectlist', {projects: projects, req: req});
     });
   });
