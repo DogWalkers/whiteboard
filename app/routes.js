@@ -63,7 +63,9 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
   });
 
 app.get('/myprojects', function(req, res){
-  res.send("sup");
+  Project.find({creator: req.user}).exec(function(err, p){
+    res.render('myprojects', {projects: p, req: req});
+  });
 });
 
 app.get('/createproject', isLoggedIn, function(req,res){
