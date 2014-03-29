@@ -21,6 +21,11 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
         label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+        .skillsPreferred {
+            -webkit-column-count:3; /* Chrome, Safari, Opera */
+            -moz-column-count:3; /* Firefox */
+            column-count:3;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +46,14 @@
                 <div class="form-group positionName" style="display: none">
                     <label>Name of Position (ex. Web Developer)</label>
                     <input type="text" class="form-control required" name="positionName"></input>
+                </div>
+                <div class="form-group skillsPreferred" style="display: none">
+                    <label>Preferred Skills:</label>
+                    <% skills.forEach(function(entry){ %>
+                    <br>
+                    <input type="checkbox" name="<%=entry%>"><%=entry%>
+                    <% }); %>
+                    
                 </div>
                 <div class="form-group numPositions" style="display: none">
                     <label>Number of Positions</label>
@@ -86,13 +99,15 @@
         $("#title").keyup(function(){
             $(".description").show("fast", function(){
                 $(".positionName").show("fast", function(){
-                    $(".numPositions").show("fast", function(){
-                     $(".timeRequired").show("fast", function(){
-                        $(".startDate").show("fast", function(){
-                            $(".submit").show("fast");
+                    $(".skillsPreferred").show("fast", function(){
+                        $(".numPositions").show("fast", function(){
+                           $(".timeRequired").show("fast", function(){
+                            $(".startDate").show("fast", function(){
+                                $(".submit").show("fast");
+                            }); 
                         }); 
-                    }); 
-                 });
+                       });
+                    });
                 });
             });
         }); 

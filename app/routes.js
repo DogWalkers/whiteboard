@@ -2,7 +2,7 @@ var User = require("../models/user");
 var Project = require("../models/project");
 
 module.exports = function(app, passport){
-  var skillsList = ["css", "javascript"];
+var skillsList = ["CSS", "JavaScript","C#","Java","Objective-C","C++","PHP","(Visual) Basic","Python","Visual Basic .NET","Transact-SQL","Perl","Ruby","Delphi/Object Pascal","Lisp","D","Assembly","PL/SQL","MATLAB"];
 
 
 	app.get('/', function(req,res){
@@ -67,7 +67,7 @@ app.get('/myprojects', function(req, res){
 });
 
 app.get('/createproject', isLoggedIn, function(req,res){
-  res.render("createproject", {req: req});
+  res.render("createproject", {req: req, skills: skillsList});
 });
 
 app.post('/createproject', isLoggedIn, function(req, res){
@@ -80,8 +80,18 @@ app.post('/createproject', isLoggedIn, function(req, res){
    var timeRequired = req.body.timeRequired;
    var startDate = req.body.startDate;
    var creator = req.user;
+   var skillsToAdd = [];
+    skillsList.forEach(function(skill){
+      
+      if(req.body[skill]==="on"){
+        skillsToAdd.push(skill);
+      }
+    });
 
-   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator});
+
+
+
+   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, skillsPreferred: skillsToAdd});
    newProject.save(function(err, newProject) {
       if (err) {
         res.send(err);
