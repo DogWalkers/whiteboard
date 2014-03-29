@@ -22,11 +22,50 @@
 
 </head>
 <body>
-	<% include navbar %>
+	<%=req.user.facebook.name %>
+  <div class = "container">
+	<form class="form-horizontal">
+  <fieldset>
+    <legend>Add Skills</legend>
+    
+    <div class="form-group">
+      <div class="col-lg-10">
+       
+        <% skills.forEach(function(entry){ %>
+         <div class="checkbox">
+			    <label>
+            <input type="checkbox" name = "<%= entry %>" > <%= entry %>
+          </label>
 
 
+
+           </div>
+
+
+        	<% });%>
+          
+       
+      </div>
+    </div>
+    
+    
+    
+    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <a href = "http://google.com"><button class="btn btn-default">Skip</button></a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+	</div>
 
 	
+
+
+
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/retina.js"></script>
 </body>

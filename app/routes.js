@@ -14,7 +14,8 @@ module.exports = function(app, passport){
       res.redirect('/listprojects');
     } else {
       console.log(skillsList);
-      res.render("firstuser", {skills: skillsList});
+      console.log(req.user);
+      res.render("firstuser", {skills: skillsList, req: req});
     }
   });
 
