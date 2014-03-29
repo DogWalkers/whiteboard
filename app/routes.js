@@ -21,6 +21,7 @@ module.exports = function(app, passport){
 
   app.get('/listprojects', isLoggedIn, function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
+      console.log(projects);
       res.render('projectlist', {projects: projects, req: req});
     });
   });
@@ -43,13 +44,28 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
   });
 
 app.get('/createproject', isLoggedIn, function(req,res){
-  res.render("createproject");
+  res.render("createproject", {req: req});
 });
 
-  app.post('/createproject', isLoggedIn, function(req, res){
+app.post('/createproject', isLoggedIn, function(req, res){
    // res.render('/viewproject' + ....);
+   console.log(req.body);
+   var title = req.body.title;
+   var description = req.body.description;
+   var positionName = req.body.positionName;
+   var numPositions = req.body.numPositions;
+   var timeRequired = req.body.timeRequired;
+   var startDate = req.body.startDate;
 
-  });
+   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate});
+   newProject.save(function(err, newProject) {
+      if (err) {
+        res.send("could not save the project")
+      } else {-
+        res.redirect("/viewproject/" + newProject._id);
+      }
+   });
+});
 
   app.post('/addskills', isLoggedIn, function(req, res){
     
