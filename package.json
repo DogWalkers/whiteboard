@@ -30,7 +30,10 @@
     "mongoose": "latest",
     "passport": "latest",
     "passport-facebook": "latest",
-    "connect-flash": "latest"
+    "passport-local": "latest",
+    "connect-flash": "latest",
+    "connect-mongo" : "latest",
+    "mongodb": "latest"
   },
   "devDependencies": {},
   "bundleDependencies": [],

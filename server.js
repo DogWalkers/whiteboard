@@ -120,12 +120,12 @@ var MainServer = function() {
         self.app = express();
         self.app.use(express.urlencoded());
         self.app.use(express.logger('dev'));
-        //var MongoStore = require('connect-mongo')(express);
+        var MongoStore = require('connect-mongo')(express);
         self.app.use(express.cookieParser());
-        //self.app.use(express.session({
-        //    store: new MongoStore({url: settings.connection_string}),
-        //    secret: 'ilovescotchscotchyscotchscotch' 
-        //})); // session secret
+       /* self.app.use(express.session({
+            store: new MongoStore({url: settings.connection_string}),
+            secret: 'hackalothackalotIhackalot' 
+        }));*/ // session secret
         self.app.use(passport.initialize());
         self.app.use(passport.session()); // persistent login sessions
         self.app.use(flash()); // use connect-flash for flash messages stored in session
@@ -133,8 +133,8 @@ var MainServer = function() {
         self.app.use(express.static(__dirname + '/public'));
 
         require('./app/routes.js')(self.app, passport);
-        //require('./config/passport')(passport);
-        //require('./config/database')(settings.connection_string);
+        require('./config/passport')(passport);
+        require('./config/database')(settings.connection_string);
     };
 
 
