@@ -22,9 +22,9 @@
 
 </head>
 <body>
-	<%=req.user.facebook.name %>
+	<% include navbar %>
   <div class = "container">
-	<form class="form-horizontal">
+	<form class="form-horizontal" action = "/addskills">
   <fieldset>
     <legend>Add Skills</legend>
     
@@ -53,7 +53,7 @@
     
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <a href = "http://google.com"><button class="btn btn-default">Skip</button></a>
+        <a href = "/listprojects"><button class="btn btn-default">Skip</button></a>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
