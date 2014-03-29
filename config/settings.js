@@ -5,7 +5,7 @@ exports.init = function(){
 	exports.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
     exports.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
     if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-	    exports.connection_string = 'mongodb://admin:LE7qWuPHYiqn@127.10.3.2:27017/whiteboard';//wut
+	    exports.connection_string = 'mongodb://admin:LE7qWuPHYiqn@127.11.47.130:27017/whiteboard';//wut
     }else{
         exports.connection_string = "mongodb://localhost:27017/whiteboarddb1";//wut
     }
