@@ -43,7 +43,7 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
   });
 
 app.get('/createproject', isLoggedIn, function(req,res){
-  res.render("createproject");
+  res.render("createproject", {req: req});
 });
 
   app.post('/createproject', isLoggedIn, function(req, res){
