@@ -62,6 +62,10 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
     });
   });
 
+app.get('/myprojects', function(req, res){
+  res.send("sup");
+});
+
 app.get('/createproject', isLoggedIn, function(req,res){
   res.render("createproject", {req: req});
 });

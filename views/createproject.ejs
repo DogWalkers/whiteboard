@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.png">
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link href="css/hover_pack.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
@@ -49,41 +49,45 @@
                     <input type="text" class="form-control" name="timeRequired"></input>
                 </div>
                 <div class="form-group startDate" style="display: none">
-                    <label>Start Date</label>
-                    <input type="text" class="form-control" name="startDate"></input>
-                </div>
+              </head>
+              <body>
+                <label>Start Date</label>
+                <input type="text" id= "datepicker" class="form-control" name="startDate"></input>
+            </div>
 
-                <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
-            </form>
-        </div>
-
-
+            <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
+        </form>
     </div>
 
 
+</div>
 
 
-     <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/retina.js"></script>
+<script src="js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/retina.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $("#title").keyup(function(){
-                $(".description").show("fast", function(){
-                    $(".positionName").show("fast", function(){
-                        $(".numPositions").show("fast", function(){
-                           $(".timeRequired").show("fast", function(){
-                                $(".startDate").show("fast", function(){
-                                    $(".submit").show("fast");
-                                }); 
-                            }); 
-                        });
-                    });
+<script>
+    $(document).ready(function(){
+        $( "#datepicker" ).datepicker();
+
+
+        $("#title").keyup(function(){
+            $(".description").show("fast", function(){
+                $(".positionName").show("fast", function(){
+                    $(".numPositions").show("fast", function(){
+                     $(".timeRequired").show("fast", function(){
+                        $(".startDate").show("fast", function(){
+                            $(".submit").show("fast");
+                        }); 
+                    }); 
+                 });
                 });
-            }); 
+            });
+        }); 
 
-        });
+    });
 
-    </script>
+</script>
 </body>

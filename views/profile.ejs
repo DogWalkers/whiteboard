@@ -30,50 +30,43 @@
       <div class="panel-heading text-center"><h2><%= user.facebook.name%></h2></div>
       <div class="panel-body">
 
-      <img src="http://graph.facebook.com/<%=user.facebook.id%>/picture?type=large" class=" text-center col-md-4">
+        <img src="http://graph.facebook.com/<%=user.facebook.id%>/picture?type=large" class=" text-center col-md-4">
 
-      <div class="col-md-4">
-        <b>Email: </b>
-        <a href="mailto:<%= user.facebook.email%>" target="_top"><%= user.facebook.email%></a>
-         <br>
-        <b>Date Joined: </b><span class = "date-time"><%= user.timeCreated%></span>
-      
-      <h5>Skills</h5>
-      <ul>
-        <% user.skills.forEach(function(skill){ %>
-        <li><%= skill %></li>
-        <%  });%>
-      </ul>
-      <h5>Projects</h5>
-      <ul>
-        <% docs.forEach(function(project){ %>
-        <li><a href="/viewproject/<%=project._id%>"><%= project.title %></a></li>
-        <%});%>
-      </ul>
-      </div>
+        <div class="col-md-4">
+          <b>Email: </b>
+          <a href="mailto:<%= user.facebook.email%>" target="_top"><%= user.facebook.email%></a>
+          <br>
+          <b>Date Joined: </b><span class = "date-time"><%= user.timeCreated%></span>
+          
+          <h5>Skills</h5>
+          <ul>
+            <% user.skills.forEach(function(skill){ %>
+            <li><%= skill %></li>
+            <%  });%>
+          </ul>
+          <h5>Projects</h5>
+          <ul>
+            <% docs.forEach(function(project){ %>
+            <li><a href="/viewproject/<%=project._id%>"><%= project.title %></a></li>
+            <%});%>
+          </ul>
+        </div>
         
+      </div>
     </div>
+
   </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="panel panel-default col-md-8 cold-md-offset-2">
-  <div class="panel-heading">Panel heading</div>
-  <div class="panel-body">
-    Panel content
-  </div>
-</div>
-
-</div>
 
 
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/retina.js"></script>
-<script>
-  var date = new Date($(".date-time").html());
-  var day = date.getDate();
-  var month = date.getMonth()+1;
-  var year = date.getFullYear();
-  $(".date-time").html(day + "/" + month + "/" + year);
-</script>
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/retina.js"></script>
+  <script>
+    var date = new Date($(".date-time").html());
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    $(".date-time").html(day + "/" + month + "/" + year);
+  </script>
 </body>
