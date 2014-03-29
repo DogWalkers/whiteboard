@@ -43,8 +43,8 @@ app.get('/profile', isLoggedIn, function(req, res){
           res.render('profile', {docs: docs, req: req, user: doc}); 
         
         }else{
-          res.send("mistake");
-          //res.render('profile', {docs: docs, req: req, user: req.user}); 
+          //res.send("mistake");
+          res.render('profile', {docs: docs, req: req, user: req.user}); 
         }
       });
       

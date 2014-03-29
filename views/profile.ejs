@@ -67,8 +67,8 @@
   <script src="js/retina.js"></script>
   <script>
   var date = new Date($(".date-time").html());
-  var day = date.getDate();
-  var month = date.getMonth();
+  var day = date.getDate()+1;
+  var month = date.getMonth()+1;
   var year = date.getFullYear();
   $(".date-time").html(day + "/" + month + "/" + year);
   </script>
