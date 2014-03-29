@@ -56,8 +56,9 @@ app.post('/createproject', isLoggedIn, function(req, res){
    var numPositions = req.body.numPositions;
    var timeRequired = req.body.timeRequired;
    var startDate = req.body.startDate;
+   var creator = req.user;
 
-   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate});
+   var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator});
    newProject.save(function(err, newProject) {
       if (err) {
         res.send(err);
