@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Skills</title>
+	<title>Create a Project</title>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,9 @@
     <link href="css/colors/color-74c9be.css" rel="stylesheet">    
     <link href="css/animations.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-
+    <style type="text/css">
+        label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+    </style>
 </head>
 <body>
 	<% include navbar %>
@@ -27,32 +29,32 @@
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">
             <legend>Post a New Project</legend>
-            <form action="/createproject" method="post">
+            <form action="/createproject" method="post" id="myform">
                 <div class="form-group title">
                     <label>Title of Project</label>
-                    <input type="text" class="form-control" name="title" id="title"></input>
+                    <input type="text" class="form-control required" name="title" id="title"></input>
                 </div>
                 <div class="form-group description" style="display: none">
                     <label>Description of Project</label>
-                    <textarea rows="5" class="form-control" name="description" style="resize:vertical;min-height:2em"></textarea>
+                    <textarea rows="5" class="form-control required" name="description" style="resize:vertical;min-height:2em"></textarea>
                 </div>
                 <div class="form-group positionName" style="display: none">
-                    <label>Name of Position</label>
-                    <input type="text" class="form-control" name="positionName"></input>
+                    <label>Name of Position (ex. Web Developer)</label>
+                    <input type="text" class="form-control required" name="positionName"></input>
                 </div>
                 <div class="form-group numPositions" style="display: none">
                     <label>Number of Positions</label>
-                    <input type="text" class="form-control" name="numPositions"></input>
+                    <input type="text" class="form-control required" name="numPositions"></input>
                 </div>
                 <div class="form-group timeRequired" style="display: none">
-                    <label>Time Required for Position</label>
-                    <input type="text" class="form-control" name="timeRequired"></input>
+                    <label>Time Required for Position (ex. 15 days)</label>
+                    <input type="text" class="form-control required" name="timeRequired"></input>
                 </div>
-                <div class="form-group startDate" style="display: none">
+                <div class="form-group startDate required" style="display: none">
               </head>
               <body>
                 <label>Start Date</label>
-                <input type="text" id= "datepicker" class="form-control" name="startDate"></input>
+                <input type="text" id= "datepicker" class="form-control required" name="startDate"></input>
             </div>
 
             <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
@@ -63,15 +65,23 @@
 </div>
 
 
-<script src="js/jquery.js"></script>
+<script src="/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/retina.js"></script>
+<script src="/js/jquery.validate.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/retina.js"></script>
 
 <script>
     $(document).ready(function(){
         $( "#datepicker" ).datepicker();
 
+        $( "#myform" ).validate({
+            rules: {
+                numPositions: {
+                    number: true
+                }
+            }
+        });
 
         $("#title").keyup(function(){
             $(".description").show("fast", function(){
