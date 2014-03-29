@@ -1,17 +1,23 @@
 var User = require("../models/user");
 
 module.exports = function(app, passport){
+  var skillsList = ["css", "javascript"];
+
+
 	app.get('/', function(req,res){
 		res.render("landingpage");
 	});
 
   app.get('/loginsuccess', isLoggedIn, function(req,res){
-    res.render("firstuser", {skills: User.schema.path('skills').enumValues});
+    console.log(skillsList);
+    res.render("firstuser", {skills: skillsList});
 
   });
 
   app.get('/listprojects', function(req, res){
-
+    Project.find().populate('creator').exec(function(err, projects){
+      res.render('/projectlist', {projects: projects});
+    });
   });
 
 app.get('/logout', function(req, res){

@@ -2,7 +2,6 @@
 // load the things we need
 var mongoose = require('mongoose');
 //var bcrypt   = require('bcrypt-nodejs');
-var skillsList = ['CSS', 'Javascript'];
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -14,7 +13,7 @@ var userSchema = mongoose.Schema({
     },
    
 	timeCreated : { type : Date, default: Date.now },
-	skills: [{type: String, enum: skillsList}],
+	skills: [{type: String}],
 });
 
 // methods ======================
