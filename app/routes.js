@@ -58,7 +58,7 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
     console.log(req.url);
     console.log(id);
     Project.findById(id).exec(function(err, p){
-      res.render('viewproject', {project: p});
+      res.render('viewproject', {project: p, req:req});
     });
   });
 
