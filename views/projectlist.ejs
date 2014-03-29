@@ -43,7 +43,8 @@
 					<div class="panel-body" style="padding:22px; text-align:justify">
 						<%=entry.description%>
 						<br></br>
-						<a href="/profile?userid=<%entry.creator.id%>">
+						<% console.log(entry.creator._id);%>
+						<a href="/profile?userid=<%=entry.creator._id%>">
 							<span class="author">By <%=entry["creator"].facebook.name%></span>
 						</a>
 						

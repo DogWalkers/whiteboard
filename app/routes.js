@@ -21,7 +21,7 @@ module.exports = function(app, passport){
 
   app.get('/listprojects', isLoggedIn, function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
-      console.log(projects);
+      console.log(projects[2].creator._id);
       res.render('projectlist', {projects: projects, req: req});
     });
   });
@@ -31,7 +31,27 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/profile', isLoggedIn, function(req, res){
-  res.render('profile', {req: req});
+  Project.find({'creator': req.user}, function (err, docs) {
+    if(err)
+    {
+      res.send("Projects could not be populated.");
+    }
+    else
+    {
+      console.log(req.query.userid);
+      User.findById(req.query.userid).exec(function(err, doc){
+        if(doc){
+          res.render('profile', {docs: docs, req: req, user: doc}); 
+        
+        }else{
+          res.send("mistake");
+          //res.render('profile', {docs: docs, req: req, user: req.user}); 
+        }
+      });
+      
+    }
+    
+  })
 });
 
 app.get('/viewproject/*', isLoggedIn, function(req, res){
