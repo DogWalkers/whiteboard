@@ -23,16 +23,19 @@
 </head>
 <body>
   <% include navbar %>
-  <div class = "container">
+  <br><br>
+  <div class = "container col-md-8 col-md-offset-2">
 
-    <div class="panel panel-default col-md-8 col-md-offset-2">
+    <div class="panel panel-default ">
       <div class="panel-heading text-center"><h2><%= user.facebook.name%></h2></div>
       <div class="panel-body">
 
       <img src="http://graph.facebook.com/<%=user.facebook.id%>/picture?type=large" class=" text-center col-md-4">
 
       <div class="col-md-4">
-        <b>Email: </b><%= user.facebook.email%> <br>
+        <b>Email: </b>
+        <a href="mailto:<%= user.facebook.email%>" target="_top"><%= user.facebook.email%></a>
+         <br>
         <b>Date Joined: </b><span class = "date-time"><%= user.timeCreated%></span>
       
       <h5>Skills</h5>
@@ -51,6 +54,14 @@
         
     </div>
   </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="panel panel-default col-md-8 cold-md-offset-2">
+  <div class="panel-heading">Panel heading</div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+
 </div>
 
 
