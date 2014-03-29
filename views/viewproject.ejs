@@ -48,8 +48,10 @@
 			</ul>
 			</div>
 
-			<div class="text-center" style="padding-top:50px"><a href="mailto:<%=project.creator.facebook.email%>"><button type="button" class="btn btn-primary" >I'm Interested! </button></a></div>
-
+			<% if(req.user._id != project.creator.id){%>
+			
+			<div class="text-center" style="padding-top:50px"><a href="mailto:<%=project.creator.facebook.email%>"><button type="button" class="btn btn-primary btn-sm%>" >I'm Interested! </button></a></div>
+			<% } %>
 
 
 		</div>
