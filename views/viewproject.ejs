@@ -29,17 +29,24 @@
 			<div style="float:right;padding-right:50px"><span class="fa fa-eye" ></span> <%=project.numViews%></div>
 			<br><br>
 			<h4>Project Description</h4>
-			<p style="text-indent:20px; text-align:justify; padding:15px"><%=project.description%></p> 
-			<h4>Start Date:<br> <small><%=project.startDate%></small></h4> <br>
-			<h4>Looking for:&nbsp;&nbsp;<br> <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
+			<p style="text-indent:20px; text-align:justify; padding-left:15px; padding-bottom:15px; padding-right:15px"><%=project.description%></p>
+			<h4>Start Date:<small>&nbsp;&nbsp;&nbsp;&nbsp;<%=project.startDate%></small></span></h4><br>
+			<h4>Looking for:&nbsp;&nbsp; <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
 			<br>
 			<h4>Preferred Skills: </h4>
+			<div style="-webkit-column-count:3;
+			-moz-column-count:3; 
+			column-count:3;">
 			<ul>
+				<%if (!project[0]) {%>
+					<li> None </li>
+				<%}%>
 			<% project.preferredSkills.forEach(function(entry){ %>
 				<li><%=entry%></li>
 
 			<% }); %>
 			</ul>
+			</div>
 
 			<div class="text-center" style="padding-top:50px"><a href="mailto:<%=project.creator.facebook.email%>"><button type="button" class="btn btn-primary" >I'm Interested! </button></a></div>
 
