@@ -32,28 +32,31 @@ a<!DOCTYPE html>
 				<% projects.forEach(function(entry){ %>
 				<div class="panel panel-default">
 
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=count%>">
+					<a data-toggle="collapse" data-parent="#accordion">
 						<div class="panel-heading">
-							<span class = "glyphicon glyphicon-plus right"></span>
 							<h4 class="panel-title" style="color:black">
 								<%=entry.title%>
 							</h4>
 						</div>
 					</a>
-					<div id="collapse<%=count%>" class="panel-collapse collapse in">
+					<div>
 						<div class="panel-body" style="padding:22px; text-align:justify">
 							<%=entry.description%>
 							<br></br>
-							<a href="/profile?userid=<%=entry.creator._id%>">
-								<span class="author">By <%=req.user.facebook.name%></span>
-							</a>
-							<a href="/viewproject/<%=entry.id%>">
-								<button type="button" class="btn btn-danger btn-sm" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
-								
-							</a>
-							<a href="/viewproject/<%=entry.id%>">
-								<button type="button" class="btn btn-warning btn-sm" >Edit <span class = "glyphicon glyphicon-pencil"></span> </button>
-							</a>
+							Created <time class="timeago" datetime="<%=entry.dateCreated.toISOString()%>"></time>
+							<div class="row", style="float:right">
+								<div class="col-xs-6">
+									<a href="/viewproject/<%=entry.id%>">
+										<button type="button" class="btn btn-warning btn-sm" >Edit <span class = "glyphicon glyphicon-pencil"></span> </button>
+									</a>
+								</div>
+
+								<div class="col-xs-6">
+									<a href="/viewproject/<%=entry.id%>">
+										<button type="button" class="btn btn-danger btn-sm" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -63,7 +66,14 @@ a<!DOCTYPE html>
 		</div>
 	</div>
 	<script src = "js/jquery.js"></script>
+	<script src="/js/jquery.timeago.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/retina.js"></script>
+	<script>
+		$(document).ready(function() {
+			//$.timeago.settings.allowFuture = true;
+  			$("time.timeago").timeago();
+		});
+	</script>
 </body>
 </html>

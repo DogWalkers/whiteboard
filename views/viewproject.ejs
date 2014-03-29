@@ -25,11 +25,11 @@
 	<div class = "container"> 
 		<div class = "col-sm-8 col-sm-offset-2  well well-lg" style="background-color:white">
 			<legend><%=project.title%></legend>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Created by <a href="/profile?userid=<%=project.creator._id%>"><%=project.creator.facebook.name%></a> <time class="timeago" datetime="<%=project.dateCreated.toISOString()%>"></time>
+			Created by <a href="/profile?userid=<%=project.creator._id%>"><%=project.creator.facebook.name%></a> <time class="timeago" datetime="<%=project.dateCreated.toISOString()%>"></time>
 			<div style="float:right;padding-right:50px"><span class="fa fa-eye" ></span> <%=project.numViews%></div>
 			<br><br>
 			<h4>Project Description</h4>
-			<p style="text-indent:20px"><%=project.description%></p> 
+			<p style="text-indent:20px; text-align:justify; padding:15px"><%=project.description%></p> 
 			<h4>Start Date:<br> <small><%=project.startDate%></small></h4> <br>
 			<h4>Looking for:&nbsp;&nbsp;<br> <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
 			<br>
