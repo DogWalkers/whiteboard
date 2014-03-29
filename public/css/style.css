@@ -22,7 +22,28 @@ body
 
 .btn-sm
 {
+<<<<<<< HEAD
 	float: right;
 	vertical-align: center;
 	display: inline-block;
 }
+=======
+	padding-top: 70px;
+}
+
+.author
+{
+	font-size: 12px;
+	color: #AAAAB3;
+	float: left;
+	vertical-align: bottom;
+	display: inline-block;
+}
+
+.btn-sm
+{
+float: right;
+vertical-align: center;
+display: inline-block;
+}
+>>>>>>> design changes
