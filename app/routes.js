@@ -35,7 +35,7 @@ app.get('/profile', isLoggedIn, function(req, res){
 
         if(doc){
           Project.find({'creator': doc}, function (err, docs) {
-          res.render('profile', {docs: docs, req: req, user: req.user}); 
+          res.render('profile', {docs: docs, req: req, user: doc}); 
         });
         }else{
           //res.send("mistake");
