@@ -25,7 +25,8 @@
   },
 
   "dependencies": {
-      "express": "latest",
+    "express": "latest",
+    "ejs": "latest",
     "mongoose": "latest",
     "passport": "latest",
     "passport-facebook": "latest",

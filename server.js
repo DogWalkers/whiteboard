@@ -143,7 +143,7 @@ var MainServer = function() {
      */
     self.initialize = function() {
         self.setupVariables();
-        self.populateCache();
+        //self.populateCache();
         self.setupTerminationHandlers();
         settings.init();
         // Create the express server and routes.
