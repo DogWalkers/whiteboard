@@ -27,10 +27,30 @@
 	<div class = "container"> 
 		<div class = "col-sm-8 col-sm-offset-2">
 			<legend><%=project.title%></legend>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Created by <a href="/profile?userid=<%=project.creator._id%>"><%=project.creator.facebook.name%></a> <time class="timeago" datetime="<%=project.dateCreated.toISOString()%>"></time>
+			<div style="float:right;padding-right:50px"><span class="fa fa-eye" ></span> <%=project.numViews%></div>
+			<br><br>
+			<h4>Project Description</h4>
+			<p style="text-indent:20px"><%=project.description%></p>
+
+			<h4>Looking for:&nbsp;&nbsp; <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
+	
+
+			<div class="text-center" style="padding-top:50px"><button type="button" class="btn btn-primary" >I'm Interested! </button></div>
+
+
+
 		</div>
 	</div>
-	<script src = "//jquery.js"></script>
+	<script src = "/js/jquery.js"></script>
+	<script src="/js/jquery.timeago.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/retina.js"></script>
+	<script>
+		$(document).ready(function() {
+			//$.timeago.settings.allowFuture = true;
+  			$("time.timeago").timeago();
+		});
+	</script>
 </body>
 </html>

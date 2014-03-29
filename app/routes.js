@@ -57,7 +57,7 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
     var id = req.url.split('/')[2];
     console.log(req.url);
     console.log(id);
-    Project.findById(id).exec(function(err, p){
+    Project.findByIdAndUpdate(id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
       res.render('viewproject', {project: p, req:req});
     });
   });
