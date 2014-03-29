@@ -5,10 +5,16 @@ module.exports = function(app, passport){
 
   app.get('/loginsuccess', isLoggedIn, function(req,res){
     console.log("hey");
-    res.send("hey" + req.user.facebook.name);
+    res.render("firstuser");
 
   });
 
+  app.post('/submitproject', function(req, res){
+    Project newProject = req.sdf;
+
+    newProject.save();
+
+  });
 
 // =====================================
   // FACEBOOK ROUTES =====================
