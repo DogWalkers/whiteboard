@@ -47,14 +47,28 @@ app.get('/createproject', function(req,res){
 });
 
   app.post('/createproject', function(req, res){
-    //Project newProject = req.sdf;
-
-    //newProject.save();
+    
 
   });
 
   app.post('/addskills', function(req, res){
-
+    
+    var skillsToAdd = [];
+    skillsList.forEach(function(skill){
+      
+      if(req.body[skill]==="on"){
+        skillsToAdd.push(skill);
+      }
+    });
+    User.findByIdAndUpdate(req.user._id, {$pushAll: {skills: skillsToAdd}},function(err){
+      if(err){
+        console.log("poop");
+      }else{
+        
+        res.redirect('/listprojects');
+      }
+    });
+    
 
   });
 
