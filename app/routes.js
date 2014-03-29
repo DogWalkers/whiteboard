@@ -30,27 +30,21 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/profile', isLoggedIn, function(req, res){
-  Project.find({'creator': req.user}, function (err, docs) {
-    if(err)
-    {
-      res.send("Projects could not be populated.");
-    }
-    else
-    {
-      console.log(req.query.userid);
-      User.findById(req.query.userid).exec(function(err, doc){
+
+        User.findById(req.query.userid).exec(function(err, doc){
+
         if(doc){
-          res.render('profile', {docs: docs, req: req, user: doc}); 
-        
+          Project.find({'creator': doc}, function (err, docs) {
+          res.render('profile', {docs: docs, req: req, user: req.user}); 
+        });
         }else{
           //res.send("mistake");
-          res.render('profile', {docs: docs, req: req, user: req.user}); 
+           Project.find({'creator': req.user}, function (err, docs) {
+          res.render('profile', {docs: docs, req: req, user: req.user});
+          }); 
         }
       });
-      
-    }
-    
-  })
+
 });
 
 app.get('/viewproject/*', isLoggedIn, function(req, res){
