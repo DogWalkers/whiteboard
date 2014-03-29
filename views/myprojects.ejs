@@ -8,7 +8,7 @@ a<!DOCTYPE html>
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="ico/favicon.png">
 
-	<title>Available Projects</title>
+	<title>My Projects</title>
 
 	<link href="css/hover_pack.css" rel="stylesheet">
 
@@ -26,7 +26,7 @@ a<!DOCTYPE html>
 	<% include navbar %>
 	<div class = "container"> 
 		<div class = "col-sm-8 col-sm-offset-2">
-			<legend>Projects</legend>
+			<legend>Manage Projects</legend>
 			<% var count = 1; %>
 			<div class="panel-group" id="accordion">
 				<% projects.forEach(function(entry){ %>
@@ -40,17 +40,19 @@ a<!DOCTYPE html>
 							</h4>
 						</div>
 					</a>
-					<div id="collapse<%=count%>" class="panel-collapse collapse">
+					<div id="collapse<%=count%>" class="panel-collapse collapse in">
 						<div class="panel-body" style="padding:22px; text-align:justify">
 							<%=entry.description%>
 							<br></br>
-							<% console.log(entry.creator._id);%>
 							<a href="/profile?userid=<%=entry.creator._id%>">
-								<span class="author">By <%=entry["creator"].facebook.name%></span>
+								<span class="author">By <%=req.user.facebook.name%></span>
 							</a>
-
 							<a href="/viewproject/<%=entry.id%>">
-								<button type="button" class="btn btn-primary btn-sm" >More Info <span class = "glyphicon glyphicon-circle-arrow-right"></span> </button>
+								<button type="button" class="btn btn-danger btn-sm" >Delete <span class = "glyphicon glyphicon-remove"></span> </button>
+								
+							</a>
+							<a href="/viewproject/<%=entry.id%>">
+								<button type="button" class="btn btn-warning btn-sm" >Edit <span class = "glyphicon glyphicon-pencil"></span> </button>
 							</a>
 						</div>
 					</div>
