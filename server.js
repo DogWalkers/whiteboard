@@ -11,7 +11,7 @@ var settings = require('./config/settings');
 /**
  *  Define the sample application.
  */
-var SampleApp = function() {
+var MainServer = function() {
 
     //  Scope.
     var self = this;
