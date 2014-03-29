@@ -8,7 +8,7 @@ var projectSchema = mongoose.Schema({
     description: {type: String},
     positionName: {type: String},
     dateCreated: {type: Date, default: Date.now},
-    startDate: {type: Date},
+    startDate: {type: String},
     numPositions: {type: Number},
     timeRequired: {type: String},
 	creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},

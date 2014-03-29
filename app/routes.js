@@ -60,8 +60,8 @@ app.post('/createproject', isLoggedIn, function(req, res){
    var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate});
    newProject.save(function(err, newProject) {
       if (err) {
-        res.send("could not save the project")
-      } else {-
+        res.send(err);
+      } else {
         res.redirect("/viewproject/" + newProject._id);
       }
    });
