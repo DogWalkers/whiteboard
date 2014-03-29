@@ -22,7 +22,9 @@ module.exports = function(app, passport){
 
 app.get('/logout', function(req, res){
   res.render('logout');
+});
 
+app.get('/profile', function(req, res){
 
 });
 
@@ -35,7 +37,11 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
     });
   });
 
-  app.post('/submitproject', function(req, res){
+app.get('/createproject', function(req,res){
+  res.render("createproject");
+});
+
+  app.post('/createproject', function(req, res){
     //Project newProject = req.sdf;
 
     //newProject.save();
