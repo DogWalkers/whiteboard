@@ -3,7 +3,7 @@ module.exports = {
 	'facebookAuth' : {
 		'clientID' 		: '215699211971159', // your App ID
 		'clientSecret' 	: '7ebadc6ebbccc3f816eba5c1054fbf34', // your App Secret
-		'callbackURL' 	: 'http://uwwhiteboard.com/auth/facebook/callback'
+		'callbackURL' 	: 'http://www.uwwhiteboard.com/auth/facebook/callback'
 	}//,
 
 	/*'twitterAuth' : {
