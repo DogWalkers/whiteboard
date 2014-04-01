@@ -52,6 +52,7 @@ app.get('/viewproject/*', isLoggedIn, function(req, res){
 
 
     Project.findByIdAndUpdate(id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
+      if(err) return;
       console.log(p);
       res.render('viewproject', {project: p, req: req});
     });

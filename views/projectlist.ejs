@@ -26,21 +26,21 @@
 	<% include navbar %>
 	<div class = "container"> 
 		<div class = "col-sm-8 col-sm-offset-2">
-			<legend>Projects</legend>
+			<legend>Available Projects</legend>
 			<% var count = 1; %>
-			<div class="panel-group" id="accordion">
+			<div class="panel-group">
 				<% projects.forEach(function(entry){ %>
 				<div class="panel panel-default">
 
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=count%>">
+					
 						<div class="panel-heading">
-							<span class = "glyphicon glyphicon-plus right"></span>
+							
 							<h4 class="panel-title" style="color:black">
 								<%=entry.title%>
 							</h4>
 						</div>
-					</a>
-					<div id="collapse<%=count%>" class="panel-collapse collapse">
+					
+					<div class="panel">
 						<div class="panel-body" style="padding:22px; text-align:justify">
 							<%=entry.description%>
 							<br></br>
@@ -55,6 +55,7 @@
 						</div>
 					</div>
 				</div>
+				<br>
 				<% count++; %>
 				<%});%>
 			</div>

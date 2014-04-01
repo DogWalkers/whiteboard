@@ -24,7 +24,7 @@
 	<% include navbar %>
 	<div class = "container"> 
 		<div class = "col-sm-8 col-sm-offset-2  well well-lg" style="background-color:white">
-			<legend><%=project.title%></legend>
+			<legend><%=project['title']%></legend>
 			Created by <a href="/profile?userid=<%=project.creator._id%>"><%=project.creator.facebook.name%></a> <time class="timeago" datetime="<%=project.dateCreated.toISOString()%>"></time>
 			<div style="float:right;padding-right:50px"><span class="fa fa-eye" ></span> <%=project.numViews%></div>
 			<br><br>
