@@ -13,8 +13,8 @@ var skillsList = ["CSS", "JavaScript","C#","Java","Objective-C","C++","PHP","(Vi
     if (req.user.skills.length > 0) {
       res.redirect('/listprojects');
     } else {
-      console.log(skillsList);
-      console.log(req.user);
+      //console.log(skillsList);
+      //console.log(req.user);
       res.render("firstuser", {skills: skillsList, req: req});
     }
   });
@@ -47,13 +47,11 @@ app.get('/profile', isLoggedIn, function(req, res){
 
 });
 
-app.get('/viewproject/*', isLoggedIn, function(req, res){
-    var id = req.url.split('/')[2];
+app.get('/viewproject/:id', isLoggedIn, function(req, res){
 
-
-    Project.findByIdAndUpdate(id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
+    Project.findByIdAndUpdate(req.params.id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
       if(err) return;
-      console.log(p);
+      //console.log(p);
       res.render('viewproject', {project: p, req: req});
     });
   });
@@ -68,10 +66,10 @@ app.get('/createproject', isLoggedIn, function(req,res){
   res.render("createproject", {req: req, skills: skillsList});
 });
 
-app.get('/deleteproject/*', isLoggedIn, function(req, res){
-  console.log("in method");
-   var id = req.url.split('/')[2];
-  Project.findById(id).remove(function(err, doc){
+app.get('/deleteproject/:id', isLoggedIn, function(req, res){
+  //console.log("in method");
+   //var id = req.url.split('/')[2];
+  Project.findById(req.params.id).remove(function(err, doc){
     if(err){
       res.send("Could not be deleted");
     }else{
@@ -80,18 +78,18 @@ app.get('/deleteproject/*', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/editproject/*', isLoggedIn, function(req, res){
-    var id = req.url.split('/')[2];
-    Project.findById(id, function(err, p){
+app.get('/editproject/:id', isLoggedIn, function(req, res){
+    //var id = req.url.split('/')[2];
+    Project.findById(req.params.id, function(err, p){
       if(err) return err;
-      console.log(p);
+      //console.log(p);
       res.render('editproject', {project: p, req: req, skills: skillsList});
     });
   });
 
 app.post('/createproject', isLoggedIn, function(req, res){
    // res.render('/viewproject' + ....);
-   console.log(req.body);
+   //console.log(req.body);
    var title = req.body.title;
    var description = req.body.description;
    var positionName = req.body.positionName;
@@ -103,7 +101,7 @@ app.post('/createproject', isLoggedIn, function(req, res){
     skillsList.forEach(function(skill){
       
       if(req.body[skill]==="on"){
-        console.log(skill);
+        //console.log(skill);
         skillsToAdd.push(skill);
       }
     });
@@ -123,9 +121,9 @@ app.post('/createproject', isLoggedIn, function(req, res){
 
 app.post('/editproject', isLoggedIn, function(req, res){
    // res.render('/viewproject' + ....);
-   console.log(req.body);
+   //console.log(req.body);
    var id = req.body.projectid;
-   console.log(id);
+   //console.log(id);
    var title = req.body.title;
    var description = req.body.description;
    var positionName = req.body.positionName;
@@ -137,7 +135,7 @@ app.post('/editproject', isLoggedIn, function(req, res){
     skillsList.forEach(function(skill){
       
       if(req.body[skill]==="on"){
-        console.log(skill);
+        //console.log(skill);
         skillsToAdd.push(skill);
       }
     });
