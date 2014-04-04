@@ -31,7 +31,11 @@
 			<h4>Project Description</h4>
 			<p style="text-indent:20px; text-align:justify; padding-left:15px; padding-bottom:15px; padding-right:15px"><%=project.description%></p>
 			<h4>Start Date:<small>&nbsp;&nbsp;&nbsp;&nbsp;<%=project.startDate%></small></span></h4><br>
-			<h4>Looking for:&nbsp;&nbsp; <small><%=project.numPositions%> people for the job of <%=project.positionName%></small></h4>
+			<h4>Looking for:&nbsp;&nbsp; <small><%=project.numPositions%> <%if(project.numPositions===1){
+			%>person<%
+			}else{
+				%>people<%
+			}%> for the job of <%=project.positionName%></small></h4>
 			<br>
 			<h4>Preferred Skills: </h4>
 			<div style="-webkit-column-count:3;
@@ -48,7 +52,7 @@
 			</ul>
 			</div>
 
-			<% if(req.user._id != project.creator.id){%>
+			<% if(user._id != project.creator.id){%>
 			
 			<div class="text-center" style="padding-top:50px"><a href="mailto:<%=project.creator.facebook.email%>"><button type="button" class="btn btn-primary btn-sm%>" >I'm Interested! </button></a></div>
 			<% } %>
