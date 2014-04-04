@@ -70,10 +70,8 @@
               </head>
               <body>
                 <label>Start Date</label>
-                <input type="text" id= "datepicker" class="form-control required" name="startDate"></input>
+                <input type="text" readonly="true" style="background:white;cursor:text" id= "datepicker" class="form-control required" name="startDate"></input>
             </div>
-
-
 
             <button type="submit" class="btn btn-warning btn-lg submit" style="display: none">Submit</button>
         </form>
@@ -93,10 +91,19 @@
     $(document).ready(function(){
         $( "#datepicker" ).datepicker();
 
+        $.validator.addMethod("afterToday", function(value, element, params){
+            if (!/Invalid|NaN/.test(new Date(value))) {
+                return new Date(value) > new Date();
+            }
+        }, "Must start after today's date");
+
         $( "#myform" ).validate({
             rules: {
                 numPositions: {
                     number: true
+                },
+                startDate : {
+                    afterToday: true
                 }
             }
         });
