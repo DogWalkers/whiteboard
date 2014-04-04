@@ -15,13 +15,13 @@ var skillsList = ["CSS", "JavaScript","C#","Java","Objective-C","C++","PHP","(Vi
     } else {
       //console.log(skillsList);
       //console.log(req.user);
-      res.render("firstuser", {skills: skillsList, req: req});
+      res.render("firstuser", {skills: skillsList});
     }
   });
 
   app.get('/listprojects', isLoggedIn, function(req, res){
     Project.find().populate('creator').exec(function(err, projects){
-      res.render('projectlist', {projects: projects, req: req});
+      res.render('projectlist', {projects: projects});
     });
   });
 
@@ -34,13 +34,14 @@ app.get('/profile', isLoggedIn, function(req, res){
         User.findById(req.query.userid).exec(function(err, doc){
 
         if(doc){
+          //they want to see someone else
           Project.find({'creator': doc}, function (err, docs) {
-          res.render('profile', {docs: docs, req: req, user: doc}); 
+          res.render('profile', {docs: docs, displayUser: doc}); 
         });
         }else{
-          //res.send("mistake");
+          //they're seeing themselves
            Project.find({'creator': req.user}, function (err, docs) {
-          res.render('profile', {docs: docs, req: req, user: req.user});
+          res.render('profile', {docs: docs, displayUser: req.user});
           }); 
         }
       });
@@ -52,18 +53,18 @@ app.get('/viewproject/:id', isLoggedIn, function(req, res){
     Project.findByIdAndUpdate(req.params.id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
       if(err) return;
       //console.log(p);
-      res.render('viewproject', {project: p, req: req});
+      res.render('viewproject', {project: p});
     });
   });
 
-app.get('/myprojects', function(req, res){
+app.get('/myprojects', isLoggedIn, function(req, res){
   Project.find({creator: req.user}).exec(function(err, p){
-    res.render('myprojects', {projects: p, req: req});
+    res.render('myprojects', {projects: p});
   });
 });
 
 app.get('/createproject', isLoggedIn, function(req,res){
-  res.render("createproject", {req: req, skills: skillsList});
+  res.render("createproject", {skills: skillsList});
 });
 
 app.get('/deleteproject/:id', isLoggedIn, function(req, res){
@@ -83,7 +84,7 @@ app.get('/editproject/:id', isLoggedIn, function(req, res){
     Project.findById(req.params.id, function(err, p){
       if(err) return err;
       //console.log(p);
-      res.render('editproject', {project: p, req: req, skills: skillsList});
+      res.render('editproject', {project: p, skills: skillsList});
     });
   });
 
@@ -105,9 +106,6 @@ app.post('/createproject', isLoggedIn, function(req, res){
         skillsToAdd.push(skill);
       }
     });
-
-
-
 
    var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, preferredSkills: skillsToAdd});
    newProject.save(function(err, newProject) {
@@ -132,31 +130,25 @@ app.post('/editproject', isLoggedIn, function(req, res){
    var startDate = req.body.startDate;
    var creator = req.user;
    var skillsToAdd = [];
-    skillsList.forEach(function(skill){
-      
-      if(req.body[skill]==="on"){
-        //console.log(skill);
+   skillsList.forEach(function(skill){
+
+    if(req.body[skill]==="on"){
         skillsToAdd.push(skill);
       }
     });
 
-    Project.findById(id).remove(function(err, doc){
-      if(err) res.send("error");
-         var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, preferredSkills: skillsToAdd});
-   newProject.save(function(err, newProject) {
+   Project.findById(id).remove(function(err, doc){
+    if(err) res.send("error");
+    var newProject = new Project({title: title, description: description, positionName: positionName, numPositions: numPositions, timeRequired: timeRequired, startDate: startDate, creator: creator, preferredSkills: skillsToAdd});
+    newProject.save(function(err, newProject) {
       if (err) {
         res.send(err);
       } else {
         res.redirect("/viewproject/" + newProject._id);
       }
-   });
-
-
     });
-
-
-
-});
+  });
+ });
 
   app.post('/addskills', isLoggedIn, function(req, res){
     
@@ -209,7 +201,7 @@ app.post('/editproject', isLoggedIn, function(req, res){
 
 var isLoggedIn = function(req, res, next){
       if(req.isAuthenticated()){
-       // res.locals.user = req.user;
+       res.locals.user = req.user;
        // res.locals.userCount = userCount;
         return next();
       }
