@@ -2,7 +2,7 @@ var User = require("../models/user");
 var Project = require("../models/project");
 
 module.exports = function(app, passport){
-var skillsList = ["CSS", "JavaScript","C#","Java","Objective-C","C++","PHP","(Visual) Basic","Python","Visual Basic .NET","Transact-SQL","Perl","Ruby","Delphi/Object Pascal","Lisp","D","Assembly","PL/SQL","MATLAB"];
+var skillsList = ["AJAX","Android Dev","ASP.NET","C","C#","C++","CSS","Django","Eclipse","Flask","Git","Grunt","HTML","iOS dev","Java","Java Spring","Javascript","JBoss","JSON","Maven","Mocha.js","Node.js","NoSQL Databases","Objective-C","Perl","PHP","Python","Ruby","Ruby on Rails","Scala","SQL Databases","SVN","Visual Basic","Windows Azure","X-Code","XML"];
 
 
 	app.get('/', function(req,res){
