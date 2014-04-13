@@ -2,6 +2,11 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var connect = require('connect');
+
 //var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -118,12 +123,12 @@ var MainServer = function() {
     self.initializeServer = function() {
        // self.createRoutes();
         self.app = express();
-        self.app.use(express.urlencoded());
-        self.app.use(express.logger('dev'));
-        var MongoStore = require('connect-mongo')(express);
-        self.app.use(express.cookieParser());
-       self.app.use(express.session({
-            store: new MongoStore({url: settings.connection_string}),
+        self.app.use(bodyParser());
+        //self.app.use(express.logger('dev'));
+        var MongoStore = require('connect-mongo-store')(connect);
+        self.app.use(cookieParser());
+       	self.app.use(connect.session({
+            store: new MongoStore(settings.connection_string),
             secret: 'hackalothackalotIhackalot' 
         }));
         self.app.use(passport.initialize());
