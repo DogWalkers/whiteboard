@@ -1,9 +1,39 @@
 var User = require("../models/user");
 var Project = require("../models/project");
 
+var errorJSON = function(res){
+  res.json(500, { error: 'Internal Server Error' });
+}
+
 module.exports = function(app, passport){
 var skillsList = ["AJAX","Android Dev","ASP.NET","C","C#","C++","CSS","Django","Eclipse","Flask","Git","Grunt","HTML","iOS dev","Java","Java Spring","Javascript","JBoss","JSON","Maven","Mocha.js","Node.js","NoSQL Databases","Objective-C","Perl","PHP","Python","Ruby","Ruby on Rails","Scala","SQL Databases","SVN","Visual Basic","Windows Azure","X-Code","XML"];
 
+
+  //API ENDPOINTS BEGIN
+
+  app.get('/api/projects', function(req, res){
+    Project.find().populate('creator').exec(function(err, projects){
+      if(err) return errorJSON(res);
+      res.json(projects);
+    });
+  });
+
+  app.get('/api/project', function(req, res){
+    if(!req.query.id) return errorJSON(res);
+    Project.findByIdAndUpdate(req.query.id, {$inc: {numViews: 1}}).populate("creator").exec(function(err, p){
+      if(err || !p) return errorJSON(res);
+      res.json(p);
+    });
+  });
+
+  app.get('/api/profile', function(req, res){
+    if(!req.query.id) return errorJSON(res);
+    User.findById(req.query.id).exec(function(err, doc){
+      res.json(doc);
+    });
+  });
+
+  //API ENDPOINTS END
 
 	app.get('/', function(req,res){
 		res.render("landingpage");
@@ -13,8 +43,6 @@ var skillsList = ["AJAX","Android Dev","ASP.NET","C","C#","C++","CSS","Django","
     if (req.user.skills.length > 0) {
       res.redirect('/listprojects');
     } else {
-      //console.log(skillsList);
-      //console.log(req.user);
       res.render("firstuser", {skills: skillsList});
     }
   });
@@ -30,22 +58,19 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/profile', isLoggedIn, function(req, res){
-
-        User.findById(req.query.userid).exec(function(err, doc){
-
-        if(doc){
-          //they want to see someone else
-          Project.find({'creator': doc}, function (err, docs) {
-          res.render('profile', {docs: docs, displayUser: doc}); 
-        });
-        }else{
-          //they're seeing themselves
-           Project.find({'creator': req.user}, function (err, docs) {
-          res.render('profile', {docs: docs, displayUser: req.user});
-          }); 
-        }
+  User.findById(req.query.userid).exec(function(err, doc){
+    if(doc){
+      //they want to see someone else
+      Project.find({'creator': doc}, function (err, docs) {
+        res.render('profile', {docs: docs, displayUser: doc}); 
       });
-
+    }else{
+      //they're seeing themselves
+      Project.find({'creator': req.user}, function (err, docs) {
+        res.render('profile', {docs: docs, displayUser: req.user});
+      }); 
+    }
+  });
 });
 
 app.get('/viewproject/:id', isLoggedIn, function(req, res){
